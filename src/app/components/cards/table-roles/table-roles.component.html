@@ -1,0 +1,51 @@
+<div
+  class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
+  [ngClass]="color === 'light' ? 'bg-white' : 'bg-red-900 text-white'"
+>
+  <div class="rounded-t mb-0 px-4 py-3 border-0">
+    <div class="flex flex-wrap items-center">
+      <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+        <h3
+          class="font-semibold text-lg"
+          [ngClass]="color === 'light' ? 'text-gray-800' : 'text-white'"
+        >
+          Roles
+        </h3>
+      </div>
+    </div>
+  </div>
+  <div class="block w-full overflow-x-auto">
+    <table
+      datatable
+      [dtOptions]="dtOptions"
+      [dtTrigger]="dtTrigger"
+      class="items-center w-full bg-transparent border-collapse"
+    >
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nombre rol</th>
+          <th>Descripcion</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let roles of role; let indice = index">
+          <td>{{ indice + 1 }}</td>
+          <td>{{ roles.name_role }}</td>
+          <td>{{ roles.description_role }}</td>
+          <td *ngIf="roles.role_status == 1; else opposite_case">
+            <i class="fas fa-circle text-green-500 mr-2"></i>Activo
+          </td>
+          <ng-template #opposite_case
+            ><td>
+              <i class="fas fa-circle text-red-500 mr-2"></i>Inactivo
+            </td></ng-template
+          >
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
